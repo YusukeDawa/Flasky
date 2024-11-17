@@ -76,5 +76,8 @@ def index():
             session['known'] = True
         session['name'] = form.name.data
         return redirect(url_for('index'))
+
+    # Obter todos os usuários ordenados alfabeticamente
+    users = User.query.order_by(User.username).all()
     return render_template('index.html', form=form, name=session.get('name'),
-                           known=session.get('known', False))
+                           known=session.get('known', False), users=users)
